@@ -8,12 +8,14 @@
 6. deploy to us-east-1
 7. Security group will only allow my IP to SSH and connect to the EC2 instances
 
-## TinyProxy
-1. sudo vim /etc/tinyproxy/tinyproxy.conf
-2. Allow my-ip/32
-3. sudo /etc/init.d/tinyproxy restart
-4. open SG port 8888 to only me
+## TinyProxy (ubuntu)
+1. sudo apt install tinyproxy
+2. sudo vim /etc/tinyproxy/tinyproxy.conf
+3. Allow my-ip/32
+4. sudo /etc/init.d/tinyproxy restart
+5. open SG port 8888 to only me
 
-## Guides
-1. https://dev.to/viralsangani/be-anonymous-create-your-own-proxy-server-with-aws-ec2-2k63
-2. 
+## Links
+1. http://tinyproxy.github.io/
+2. https://dev.to/viralsangani/be-anonymous-create-your-own-proxy-server-with-aws-ec2-2k63
+3. 
