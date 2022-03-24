@@ -10,15 +10,15 @@ module "networking" {
   public_cidrs = [for i in range(2, 255, 2) : cidrsubnet(local.vpc_cidr, 8, i)]
 }
 
-# module "compute" {
-#   source               = "./compute"
-#   instance_count       = 1
-#   instance_type        = "t2.micro"
-#   public_sg            = module.networking.public_sg_out
-#   public_subnets       = module.networking.public_subnets
-#   vol_size             = 10
-#   key_name             = "tfkey"
-#   public_key_path      = "/home/ubuntu/.ssh/tf_key.pub"
-#   user_data_path       = "${path.root}/user-data.tpl"
-#   ssh_private_key_path = "/home/ubuntu/.ssh/tf_key"
-# }
+module "compute" {
+  source               = "./compute"
+  instance_count       = 1
+  instance_type        = "t2.micro"
+  public_sg            = module.networking.public_sg_out
+  public_subnets       = module.networking.public_subnets
+  vol_size             = 8
+
+  key_name             = "A4L"
+  public_key_path      = "/home/ubuntu/.ssh/tf_key.pub"
+  ssh_private_key_path = "/home/ubuntu/.ssh/tf_key"
+}

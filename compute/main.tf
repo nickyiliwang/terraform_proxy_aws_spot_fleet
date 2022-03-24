@@ -2,14 +2,12 @@
 
 data "aws_ami" "proxy_ami" {
   // prebaked AMI with tiny proxy
-  executable_users = ["self"]
-  most_recent      = true
-  name_regex       = "^myami-\\d{3}"
-  owners           = ["self"]
+  most_recent = true
+  owners      = ["self"]
 
   filter {
-    name   = "source"
-    values = ["425237704467/myami-ubuntu-tinyproxy"]
+    name   = "name"
+    values = ["myami-ubuntu-tinyproxy"]
   }
 
   filter {
@@ -23,7 +21,7 @@ data "aws_ami" "proxy_ami" {
   }
 }
 
-resource "random_id" "tf_ec2_node_id" {
+resource "random_id" "proxy_ec2_node_id" {
   byte_length = 2
   count       = var.instance_count
 
@@ -36,13 +34,20 @@ resource "random_id" "tf_ec2_node_id" {
 }
 
 # Request a spot instance at $0.03
-resource "aws_spot_instance_request" "cheap_worker" {
+resource "aws_spot_instance_request" "proxy_nodes" {
   count         = var.instance_count
   instance_type = "t2.micro"
   ami           = data.aws_ami.proxy_ami.id
   spot_price    = "0.0036"
 
   tags = {
-    Name = "Proxy_node"
+    Name = "Proxy_node-${random_id.proxy_ec2_node_id[count.index].dec}"
   }
+
+  connection {
+    user        = "ubuntu"
+    private_key = file("C:/Users/w_yil/OneDrive/Documents/proxy/A4L.ppk")
+    host        = self.public_ip
+  }
+
 }
