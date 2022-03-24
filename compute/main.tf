@@ -37,6 +37,7 @@ resource "random_id" "proxy_ec2_node_id" {
 resource "aws_spot_instance_request" "proxy_nodes" {
   count         = var.instance_count
   instance_type = "t2.micro"
+  subnet_id     = var.public_subnets[count.index]
   ami           = data.aws_ami.proxy_ami.id
   spot_price    = "0.0036"
 
@@ -50,4 +51,9 @@ resource "aws_spot_instance_request" "proxy_nodes" {
     host        = self.public_ip
   }
 
+  vpc_security_group_ids = [var.public_sg]
+
+  root_block_device {
+    volume_size = var.vol_size
+  }
 }
