@@ -29,8 +29,8 @@ locals {
           cidr_blocks = [var.access_ip]
         }
         proxy = {
-          from        = 8080
-          to          = 8080
+          from        = 8888
+          to          = 8888
           protocol    = "tcp"
           cidr_blocks = [var.access_ip]
         }

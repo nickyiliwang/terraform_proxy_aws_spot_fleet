@@ -19,3 +19,6 @@
 1. http://tinyproxy.github.io/
 2. https://dev.to/viralsangani/be-anonymous-create-your-own-proxy-server-with-aws-ec2-2k63
 3. 
+
+## Todo
+1. have a better output format
