@@ -12,11 +12,12 @@ module "networking" {
 
 module "compute" {
   source         = "./compute"
-  instance_count = 10
+  instance_count = 1
   instance_type  = "t2.micro"
   public_sg      = module.networking.public_sg_out
   public_subnets = module.networking.public_subnets
   vol_size       = 8
+  access_ip      = var.access_ip
 
   key_name = "A4L"
 }

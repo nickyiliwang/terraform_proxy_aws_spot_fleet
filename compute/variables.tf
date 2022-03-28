@@ -6,4 +6,5 @@ variable "public_sg" {}
 variable "public_subnets" {}
 variable "vol_size" {}
 variable "key_name" {}
+variable "access_ip" {}
 

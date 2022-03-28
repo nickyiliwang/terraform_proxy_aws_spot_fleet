@@ -1,5 +1,5 @@
 # root/outputs.tf
 
 output "instances" {
-  value = module.compute.instances[*].public_ip
+  value = [for ip in module.compute.instances[*].public_ip : "${ip}:8888"]
 }

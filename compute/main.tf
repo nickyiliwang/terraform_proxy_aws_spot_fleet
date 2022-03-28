@@ -56,4 +56,8 @@ resource "aws_spot_instance_request" "proxy_nodes" {
   root_block_device {
     volume_size = var.vol_size
   }
+
+  user_data = templatefile("${path.cwd}/compute/userdata.tpl", {
+    access_ip = var.access_ip
+  })
 }
